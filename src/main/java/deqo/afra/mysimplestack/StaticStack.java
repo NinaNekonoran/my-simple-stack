@@ -6,8 +6,10 @@ import java.util.EmptyStackException;
 public class StaticStack implements SimpleStack {
 
     ArrayList<Item> monTab;
+    int capacity;
 
     public StaticStack(int capacity) {
+        this.capacity = capacity;
         this.monTab = new ArrayList<>(capacity);
     }
 
@@ -22,8 +24,10 @@ public class StaticStack implements SimpleStack {
     }
 
     @Override
-    public void push(Item item) {
-        monTab.add(item);
+    public void push(Item item) throws Exception{
+        if(monTab.size()<capacity)
+            monTab.add(item);
+        else throw new Exception("Size max");
     }
 
     @Override

@@ -1,15 +1,15 @@
 package deqo.afra.mysimplestack;
 
 public class Item {
-    public int item;
-    public Item(int item) {
+    public Integer item;
+    public Item(Integer item) {
         this.item = item;
     }
-    public int getItem() {
+    public Integer getItem() {
         return item;
     }
 
-    public void setItem(int item) {
+    public void setItem(Integer item) {
         this.item = item;
     }
 }

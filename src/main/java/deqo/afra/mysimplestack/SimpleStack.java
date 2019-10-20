@@ -15,7 +15,7 @@ public interface SimpleStack {
          * Pushes an item onto the top of this stack.
          * null item is allowed.
          */
-        public void push(Item item);
+        public void push(Item item) throws Exception;
         /**
          * Looks at the object at the top of this stack without removing it from the stack.
          */
