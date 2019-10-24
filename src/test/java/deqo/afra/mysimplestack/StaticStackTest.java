@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 
 import static org.junit.Assert.*;
 
@@ -17,65 +18,60 @@ public class StaticStackTest {
     @Test
     public void isEmpty() throws Exception{
         assertTrue("not empty!",alors.isEmpty());
-        alors.push(new Item(5));
+        alors.push(new Item(5.0));
         assertFalse("empty!",alors.isEmpty());
     }
 
     @Test
     public void getSize() throws Exception {
-        alors.push(new Item(1));
+        alors.push(new Item(1.0));
         assertEquals("size not equals 1",1,alors.getSize());
-        alors.push(new Item(2));
+        alors.push(new Item(2.0));
         assertEquals("size not equals 1",2,alors.getSize());
     }
 
-    @Test
+    @Test(expected = Exception.class)
     public void push() throws Exception  {
         assertEquals("size not equals 0",0,alors.getSize());
-        alors.push(new Item(4));
+        alors.push(new Item(4.0));
         assertEquals("size not equals 1",1,alors.getSize());
         Item aux = alors.peek();
-        Integer aux2 = aux.getItem();
-        assertTrue(aux2 instanceof Integer);
-        assertEquals("item not equals 4",4,(int)aux.getItem());
+        Double aux2 = aux.getItem();
+        assertTrue(aux2 instanceof Double);
+        assertEquals("item not equals 4",4,aux.getItem(),0);
         assertEquals("size not equals 1",1,alors.getSize());
-        alors.push(new Item(4));
-        alors.push(new Item(4));
-        alors.push(new Item(4));
-        alors.push(new Item(4));
+        alors.push(new Item(4.0));
+        alors.push(new Item(4.0));
+        alors.push(new Item(4.0));
+        alors.push(new Item(4.0));
         assertEquals("size not equals 5",5,alors.getSize());
-        try {
-            alors.push(new Item(6));
-        }catch (Exception e){}
+        alors.push(new Item(6.0));
         assertEquals("size not equals 5",5,alors.getSize());
     }
 
-    @Test
+    @Test(expected = EmptyStackException.class)
     public void peek() throws Exception {
         assertEquals("size not equals 0",0,alors.getSize());
-        Item itemPush =new Item(4);
+        Item itemPush =new Item(4.0);
         alors.push(itemPush);
         assertEquals("size not equals 1",1,alors.getSize());
         Item itemPeek = alors.peek();
         assertEquals("size not equals 1",1,alors.getSize());
-        assertTrue(itemPeek.getItem() instanceof Integer);
+        assertTrue(itemPeek.getItem() instanceof Double);
         assertEquals("item not equals 4",itemPush.getItem(),itemPeek.getItem());
         assertEquals("item not equals 4",itemPush,itemPeek);
         assertEquals("size not equals 1",1,alors.getSize());
         alors.pop();
-        try{
-            Item itemPeek2 = alors.peek();
-        }catch (Exception e){}
+
+        Item itemPeek2 = alors.peek();
     }
 
-    @Test
+    @Test(expected = EmptyStackException.class)
     public void pop() throws Exception  {
-        alors.push(new Item(4));
+        alors.push(new Item(4.0));
         Item aux = alors.pop();
-        assertEquals("item not equals 4",4,(int)aux.getItem());
+        assertEquals("item not equals 4",4,aux.getItem(),0);
         assertEquals("size not equals 0",0,alors.getSize());
-        try{
-            Item itemPeek2 = alors.pop();
-        }catch (Exception e){}
+        Item itemPeek2 = alors.pop();
     }
 }
