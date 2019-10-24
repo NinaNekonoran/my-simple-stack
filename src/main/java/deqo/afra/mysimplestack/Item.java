@@ -5,11 +5,9 @@ public class Item {
     public Item(Double item) {
         this.item = item;
     }
-    //bon
     public Double getItem() {
         return item;
     }
-//j'ai écris ici
     public void setItem(Double item) {
         this.item = item;
     }
